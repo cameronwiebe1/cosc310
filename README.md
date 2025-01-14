@@ -13,6 +13,6 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 
 > If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
 
-## Dependency Management
+Some people who may have a different version of the extensions and may or may not see the "src" and "bin" and "lib" folders. It's OK as long as you are able to right-click and create new Java packages, right-click and create new Java classes, and run your code.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+For this GitHub repo, you will need to look inside the src folder to see all the code that we completed during class.
