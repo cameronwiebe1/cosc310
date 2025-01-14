@@ -28,5 +28,6 @@ public class HexView {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        scanner.close();
     }
 }
