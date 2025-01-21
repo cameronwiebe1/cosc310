@@ -2,8 +2,9 @@ package intro;
 
 public class Strings {
     public static void main(String[] args) {
-        encodingExperiment();
-        stringParsing();
+        // encodingExperiment();
+        stringParsingManual();
+        stringParsingWithSplit();
     }
 
     private static void encodingExperiment() {
@@ -40,17 +41,47 @@ public class Strings {
         System.out.println();
     }
 
-    private static void stringParsing() {
+    private static void stringParsingWithSplit() {
+        System.out.println("PARSING USING SPLIT");
         String routeIds = "35,76,89,90,91,95";
-        System.out.println("routeIds: " + routeIds);
+        long startTime = System.nanoTime();        
+        String[] strRouteIds = routeIds.split(",");
+        int[] intRouteIds = new int[strRouteIds.length];
+        int i = 0;
+        for (String s : strRouteIds) {
+            intRouteIds[i++] = Integer.parseInt(s.trim());
+        }
+        long finishTime = System.nanoTime();        
+        long elapsed = finishTime - startTime;
+        System.out.println("Elapsed time: " + elapsed + " ns");
+        System.out.println("Count: " + intRouteIds.length);
+        System.out.println("IDs:" + java.util.Arrays.toString(intRouteIds));
+        System.out.println();
+    }
 
+    private static void stringParsingManual() {
+        System.out.println("MANUAL PARSING");
+        String routeIds = "35,76,89,90,91,95";
+        long startTime = System.nanoTime();        
+        int[] intRouteIds = new int[10]; // over allocate
+        String currentId = "";
         // manually parse the string to count how many "ids" are present
         int count = 1;
         for (int i = 0; i < routeIds.length(); i++) {
-            if (routeIds.charAt(i) == ',') {
+            char c = routeIds.charAt(i);
+            if (c == ',') {
+                intRouteIds[count-1] = Integer.parseInt(currentId.trim());
+                currentId = "";
                 count++;
+            } else {
+                currentId += c;
             }
         }
-        System.out.println("route count: " + count);
+        long finishTime = System.nanoTime();        
+        long elapsed = finishTime - startTime;
+        System.out.println("Elapsed time: " + elapsed + " ns");
+        System.out.println("Count: " + count);
+        System.out.println("IDs:" + java.util.Arrays.toString(intRouteIds));
+        System.out.println();
     }
 }
