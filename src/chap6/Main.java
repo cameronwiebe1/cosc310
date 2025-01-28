@@ -13,7 +13,7 @@ public class Main {
             System.out.println(myResizableArray);
         } catch (IndexOutOfBoundsException ex) {
             // oh well something must have gone wrong, i'll just let my program keep going but at least i'm going to log it! 
-            System.err.println("LOG: something went wrong, accessed position 0 in array of length: " + myResizableArray.length());
+            System.err.println("LOG: something went wrong, accessed position 4 in array of length: " + myResizableArray.length());
         } finally {
             System.out.println(myResizableArray);
         }
