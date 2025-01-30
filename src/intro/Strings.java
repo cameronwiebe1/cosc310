@@ -7,6 +7,7 @@ public class Strings {
         stringParsingWithSplit();
     }
 
+    @SuppressWarnings("unused")
     private static void encodingExperiment() {
         // Let's start with just a plain old string with four regular characters (non-unicode)
         String name = "John";

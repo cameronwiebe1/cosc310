@@ -5,6 +5,7 @@ public class ResizableArray<T> {
 
     protected T[] data; // this is where the actual data is stored
 
+    @SuppressWarnings("unchecked")
     public ResizableArray() {
        data = (T[]) new Object[0];
     }
@@ -13,6 +14,7 @@ public class ResizableArray<T> {
      * adds item e to the end of the array ... always and forever
      * @param e - the new data to be added
      */
+    @SuppressWarnings("unchecked")
     public void add(T e) {
         T[] temparray = (T[]) new Object[data.length+1];
         int i=0;
@@ -28,6 +30,7 @@ public class ResizableArray<T> {
      * @param i - the index of the item to be deleted
      * @return count of how many item(s) were deleted ... pushes the burden of checking the param on the coder
      */
+    @SuppressWarnings("unchecked")
     public void delete(int i) {
         if (i >= data.length) {
             // return; // one bad way to handle invalid param/out of bounds position is to simply ignore it ... bad, bad, bad ... ignore the problem maybe it will go away
