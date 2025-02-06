@@ -1,6 +1,9 @@
 package chap8.banner;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.util.ArrayList;
 import chap8.users.User;
@@ -16,12 +19,25 @@ public class UserListPanel extends JPanel {
         userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane = new JScrollPane(userList);
         add(scrollPane, BorderLayout.CENTER);
+        userList.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                editUser();
+            }
+            
+        });
+    }
+
+    public void editUser() {
+        System.out.println(userList.getSelectedValue());
+        
     }
 
     public void updateUserList(ArrayList<User> users) {
         listModel.clear();
         for (User user : users) {
-            listModel.addElement(user.getName() + " - " + user.getType());
+            listModel.addElement(user.toString());
         }
     }
 }

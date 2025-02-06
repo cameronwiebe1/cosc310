@@ -16,6 +16,7 @@ public class Main {
 
     // Data attribute
     ArrayList<User> allusers = new ArrayList<>(100);
+    public static String[] userTypes = new String[] {"Student","Faculty","Staff","Admin"};
 
     public Main() {
         // go ahead and populate all the data first
@@ -34,7 +35,6 @@ public class Main {
         new Main();
     }
 
-    public static String[] userTypes = new String[] {"Student","Faculty","Staff"};
 
     public void createAndShowGUI() {
         JFrame frame = new JFrame("User Management");
