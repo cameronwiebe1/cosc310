@@ -14,10 +14,6 @@ import java.awt.BorderLayout;
 
 public class Main {
 
-    // UI Components
-    protected JTextField nameBox;
-    protected JComboBox<String> typeDropdown;
-        
     // Data attribute
     ArrayList<User> allusers = new ArrayList<>(100);
 
