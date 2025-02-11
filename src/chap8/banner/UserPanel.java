@@ -16,6 +16,8 @@ public class UserPanel extends JPanel {
     private JTextField nameBox;
     private JComboBox<String> typeDropdown;
     private JButton addButton;
+    private JButton saveButton;
+    private JButton loadButton;
     private UserListPanel userListPanel;
     private ArrayList<User> allUsers;
 
@@ -53,8 +55,15 @@ public class UserPanel extends JPanel {
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
         addButton = new JButton("Add User");
-        add(addButton, gbc);
+        saveButton = new JButton("Save Users");
+        loadButton = new JButton("Load Users");
+        buttonPanel.add(addButton, gbc);
+        buttonPanel.add(saveButton, gbc);
+        buttonPanel.add(loadButton, gbc);
+        add(buttonPanel, gbc);
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

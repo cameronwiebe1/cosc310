@@ -20,12 +20,12 @@ public class UserListPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(userList);
         add(scrollPane, BorderLayout.CENTER);
         userList.addListSelectionListener(new ListSelectionListener() {
-
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                editUser();
+                if(!e.getValueIsAdjusting()){
+                    editUser();
+                }
             }
-            
         });
     }
 
