@@ -11,8 +11,11 @@ import chap8.users.User;
 public class UserListPanel extends JPanel {
     private JList<String> userList;
     private DefaultListModel<String> listModel;
+    private ArrayList<User> allusers;
+    public UserPanel userPanel;
 
-    public UserListPanel() {
+    public UserListPanel(ArrayList<User> allusers) {
+        this.allusers = allusers;
         setLayout(new BorderLayout());
         listModel = new DefaultListModel<>();
         userList = new JList<>(listModel);
@@ -23,15 +26,16 @@ public class UserListPanel extends JPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if(!e.getValueIsAdjusting()){
-                    editUser();
+                    loadUser();
                 }
             }
         });
     }
 
-    public void editUser() {
-        System.out.println(userList.getSelectedValue());
-        
+    public void loadUser() {
+        User u = allusers.get(userList.getSelectedIndex());
+        userPanel.loadUser(u);
+        System.out.println(userList.getSelectedValue());        
     }
 
     public void updateUserList(ArrayList<User> users) {

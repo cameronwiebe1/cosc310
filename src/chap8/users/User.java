@@ -1,6 +1,8 @@
 package chap8.users;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
 
     protected String name;
     protected String id; // nine #
@@ -29,6 +31,27 @@ public abstract class User {
 
     public String getName() {
         return name;
+    }
+    public String getId() {
+        return id;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public String getPassword() {
+        return password; 
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     abstract public String getType();
