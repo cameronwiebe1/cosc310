@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import chap8.users.User;
 import chap8.users.Student;
@@ -24,9 +25,10 @@ public class UserPanel extends JPanel {
     private JComboBox<String> typeDropdown;
     private JButton addButton;
     private JButton updateButton;
-    // ADD A DELETE BUTTON HERE
+    // DECLARE A DELETE BUTTON HERE
     private JButton saveButton;
     private JButton loadButton;
+    private JButton sortButton;
     private UserListPanel userListPanel;
     private ArrayList<User> allusers;
     private User selectedUser; // the current user being edited if the user has selected a user from the users list
@@ -94,6 +96,18 @@ public class UserPanel extends JPanel {
         typeDropdown = new JComboBox<>(Main.userTypes);
         add(typeDropdown, gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.anchor = GridBagConstraints.CENTER;
+        sortButton = new JButton("Sort");
+        add(sortButton, gbc);
+        sortButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                java.util.Collections.sort(allusers);
+                userListPanel.updateUserList(allusers);
+            }
+        });
         gbc.gridx = 1;
         gbc.gridy = 5;
         gbc.fill = GridBagConstraints.NONE;
@@ -108,7 +122,7 @@ public class UserPanel extends JPanel {
         loadButton = new JButton("Load Users");
         buttonPanel.add(addButton, gbc);
         buttonPanel.add(updateButton, gbc);
-        // ADD THE HIDDEN DELETE BUTTON  TO THE PANEL
+        // ADD THE HIDDEN DELETE BUTTON TO THE PANEL
         buttonPanel.add(saveButton, gbc);
         buttonPanel.add(loadButton, gbc);
         add(buttonPanel, gbc);

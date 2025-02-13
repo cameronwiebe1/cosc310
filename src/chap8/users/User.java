@@ -2,7 +2,7 @@ package chap8.users;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable {
+public abstract class User implements Serializable, Comparable<User> {
 
     protected String name;
     protected String id; // nine #
@@ -53,6 +53,11 @@ public abstract class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public int compareTo(User other) {
+        return this.getName().compareTo(other.getName());
+    }
+
 
     abstract public String getType();
 }
