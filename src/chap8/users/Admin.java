@@ -2,8 +2,8 @@ package chap8.users;
 
 public class Admin extends User {
     
-    public Admin(String name, String id) {
-        super(name, id, "", "");
+    public Admin(String name, String id, String username, String password) {
+        super(name, id, username, password);
     }
 
     @Override

@@ -193,15 +193,17 @@ public class UserPanel extends JPanel {
     private void addUser() {
         String name = nameBox.getText();
         String type = (String) typeDropdown.getSelectedItem();
+        String username = usernameBox.getText();
+        String password = passwordBox.getText();
         if (!name.isEmpty() && type != null) {
             if (type.equals("Student")) {
-                allusers.add(new Student(name, type));
+                allusers.add(new Student(name, type, username, password));
             } else if (type.equals("Faculty")) {
-                allusers.add(new Faculty(name, type));
+                allusers.add(new Faculty(name, type, username, password));
             } else if (type.equals("Staff")) {
-                allusers.add(new Staff(name, type));
+                allusers.add(new Staff(name, type, username, password));
             } else if (type.equals("Admin")) {
-                allusers.add(new Admin(name, type));
+                allusers.add(new Admin(name, type, username, password));
             }
             nameBox.setText("");
             idBox.setText("");

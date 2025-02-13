@@ -2,8 +2,8 @@ package chap8.users;
 
 public class Faculty extends Employee {
 
-    public Faculty(String name, String id) {
-        super(name, id);
+    public Faculty(String name, String id, String username, String password) {
+        super(name, id, username, password);
     }
 
     @Override
