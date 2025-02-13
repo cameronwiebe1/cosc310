@@ -26,7 +26,7 @@ public abstract class User implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s - %s: 9xxxx%s", getType(), name, id.substring(5));
+        return String.format("%s - %s: 9xxxx%s", getType(), name, id.length()>6?id.substring(5):id);
     }
 
     public String getName() {

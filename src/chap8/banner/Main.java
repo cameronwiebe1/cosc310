@@ -1,15 +1,8 @@
 package chap8.banner;
 
-import java.util.ArrayList;
-
-import chap8.users.Admin;
-import chap8.users.Faculty;
-import chap8.users.Staff;
-import chap8.users.Student;
 import chap8.users.User; 
-
+import java.util.ArrayList;
 import javax.swing.*;
-
 import java.awt.BorderLayout;
 
 public class Main {

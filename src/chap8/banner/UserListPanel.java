@@ -25,7 +25,9 @@ public class UserListPanel extends JPanel {
         userList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if(!e.getValueIsAdjusting()){
+                // if we clear out the list we don't want to do anything
+                // selectedIndex is -1 when the list is empty
+                if(!e.getValueIsAdjusting() && userList.getSelectedIndex() != -1) {
                     loadUser();
                 }
             }
@@ -39,6 +41,7 @@ public class UserListPanel extends JPanel {
     }
 
     public void updateUserList(ArrayList<User> users) {
+        userList.clearSelection();
         listModel.clear();
         for (User user : users) {
             listModel.addElement(user.toString());
