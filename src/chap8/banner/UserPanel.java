@@ -32,6 +32,7 @@ public class UserPanel extends JPanel {
     private UserListPanel userListPanel;
     private ArrayList<User> allusers;
     private User selectedUser; // the current user being edited if the user has selected a user from the users list
+    private boolean reverseSort = false;
 
     public UserPanel(UserListPanel userListPanel, ArrayList<User> allusers) {
         this.userListPanel = userListPanel;
@@ -105,6 +106,10 @@ public class UserPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 java.util.Collections.sort(allusers);
+                if (reverseSort) {
+                    java.util.Collections.reverse(allusers);
+                }
+                reverseSort = !reverseSort;
                 userListPanel.updateUserList(allusers);
             }
         });
