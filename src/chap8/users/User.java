@@ -1,6 +1,7 @@
 package chap8.users;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public abstract class User implements Serializable, Comparable<User> {
 
@@ -8,6 +9,8 @@ public abstract class User implements Serializable, Comparable<User> {
     protected String id; // nine #
     protected String username;
     protected String password;
+
+    
 
     public User() {
         // nothing to do here
@@ -58,6 +61,25 @@ public abstract class User implements Serializable, Comparable<User> {
         return this.getName().compareTo(other.getName());
     }
 
+    public static ArrayList<Faculty> getFaculty(ArrayList<User> allusers) {
+        ArrayList<Faculty> facultymembers = new ArrayList<>();
+        for (User u : allusers) {
+            if (u.getType().equals("FACULTY")) {
+                facultymembers.add((Faculty)u);
+            }
+        }
+        return facultymembers;
+    }
+
+    public static ArrayList<Student> getStudents(ArrayList<User> allusers) {
+        ArrayList<Student> students = new ArrayList<>();
+        for (User u : allusers) {
+            if (u.getType().equals("STUDENT")) {
+                students.add((Student)u);
+            }
+        }
+        return students;
+    }
 
     abstract public String getType();
 }
