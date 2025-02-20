@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import chap8.courses.Course;
 import chap8.courses.Section;
@@ -27,6 +28,8 @@ public class Main {
     public Main() {
         loadUsers(); // populates users from a file exported from our banner program
         populateData(); // populates the courses, sections, and terms
+        showLogin();
+
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -35,6 +38,21 @@ public class Main {
             }
         });
         System.out.println("exiting");
+    }
+
+    private void showLogin() {
+        while (true) {
+            JLoginPane loginWindow = new JLoginPane(); // shows a login popup dialog
+            String username = loginWindow.username.getText();
+            String password = loginWindow.password.getText();
+            System.out.println(username + " " + password);
+            for (User user : allusers) {
+                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                    return;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Incorrect username or password, keep guessing!", "Uh-oh!", JOptionPane.ERROR_MESSAGE);
+        }        
     }
 
     public static void main(String[] args) {
@@ -124,7 +142,8 @@ public class Main {
             Term term = terms.get(random.nextInt(terms.size()));
             Course course = courses.get(random.nextInt(courses.size()));
             Faculty instructor = facultyMembers.get(random.nextInt(facultyMembers.size()));
-            ArrayList<Student> enrolledStudents = getSeveralRandomStudents(allStudents, 10 + random.nextInt(6)); // 10-15 students                                                                                                               
+            ArrayList<Student> enrolledStudents = getSeveralRandomStudents(allStudents, 10 + random.nextInt(6)); // 10-15
+                                                                                                                 // students
             Section section = new Section(
                     term,
                     schedules[random.nextInt(schedules.length)],
