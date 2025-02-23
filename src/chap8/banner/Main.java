@@ -30,7 +30,6 @@ public class Main {
         new Main();  
     }
 
-
     public void createAndShowGUI() {
         JFrame frame = new JFrame("User Management");
         frame.setSize(500, 500);
@@ -163,7 +162,5 @@ public class Main {
         allusers.add(new Student("Abigail White", "937162580", "awhite", "abigailpass123"));
         allusers.add(new Admin("Leo Thomas", "944736159", "lthomas", "leoadmin234"));
     }
-
-    
 
 }

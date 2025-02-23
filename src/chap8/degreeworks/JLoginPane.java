@@ -8,8 +8,8 @@ import javax.swing.JTextField;
 
 public class JLoginPane {
 
-    protected JTextField username = new JTextField(15);
-    protected JTextField password = new JTextField(15);
+    protected JTextField username = new JTextField("jhill");
+    protected JTextField password = new JTextField("jacksonpass001");
 
     public JLoginPane() {
       JPanel myPanel = new JPanel();

@@ -7,8 +7,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import chap8.courses.Course;
 import chap8.courses.Section;
@@ -24,11 +28,65 @@ public class Main {
     protected ArrayList<Course> allcourses = new ArrayList<>();
     protected ArrayList<Section> allsections = new ArrayList<>();
     protected ArrayList<Term> allterms = new ArrayList<>();
+    protected User currentuser; // this is the user who logged in
+
+    // our main UI components in the top area
+    protected CoursesActionPanel coursesPanel;
+    protected SectionsActionPanel sectionsPanel;
+    protected TermsActionPanel termsPanel;
+    protected HelpActionPanel helpPanel;
+    protected CatalogPanel catalogPanel;
+
+    // our UI callback methods to handle item selections in the various lists
+    public void handleHelpClick() {
+        // update visibility of all four panels
+        helpPanel.setVisible(true);
+        coursesPanel.setVisible(false);
+        sectionsPanel.setVisible(false);
+        termsPanel.setVisible(false);
+    }
+
+    public void handleCourseClick(Course c) {
+        coursesPanel.loadCourse(c);
+        catalogPanel.loadCourse(c);
+        
+        // update visibility of all four panels
+        helpPanel.setVisible(false);
+        coursesPanel.setVisible(true);
+        sectionsPanel.setVisible(false);
+        termsPanel.setVisible(false);
+    }
+
+    public void handleSectionClick(Section s) {
+        sectionsPanel.loadSection(s);
+
+        // update visibility of all four panels
+        helpPanel.setVisible(false);
+        coursesPanel.setVisible(false);
+        sectionsPanel.setVisible(true);
+        termsPanel.setVisible(false);
+    }
+
+    public void handleTermClick(Term t) {
+        termsPanel.loadTerm(t);
+
+        // update visibility of all four panels
+        helpPanel.setVisible(false);
+        coursesPanel.setVisible(false);
+        sectionsPanel.setVisible(false);
+        termsPanel.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Main();
+    }
 
     public Main() {
         loadUsers(); // populates users from a file exported from our banner program
         populateData(); // populates the courses, sections, and terms
-        showLogin();
+        currentuser = showLogin();
+
+        // the ONLY way to make it to this line of code is if they successfully logged in!
 
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
@@ -40,23 +98,51 @@ public class Main {
         System.out.println("exiting");
     }
 
-    private void showLogin() {
+    private User showLogin() {
         while (true) {
             JLoginPane loginWindow = new JLoginPane(); // shows a login popup dialog
-            String username = loginWindow.username.getText();
-            String password = loginWindow.password.getText();
-            System.out.println(username + " " + password);
+            String username = loginWindow.username.getText(); 
+            String password = loginWindow.password.getText(); 
             for (User user : allusers) {
                 if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                    return;
+                    return user;
                 }
             }
             JOptionPane.showMessageDialog(null, "Incorrect username or password, keep guessing!", "Uh-oh!", JOptionPane.ERROR_MESSAGE);
         }        
     }
 
-    public static void main(String[] args) {
-        new Main();
+    protected void createAndShowGUI() {
+        // The overall design is again TWO panels ... but the top one will actually have FOUR panels with THREE always hidden and only one shown at a time
+        // The bottom panel will have a list of courses, sections, and terms
+        JFrame frame = new JFrame("DegreeWorks");
+        frame.setSize(1000, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        // Create the panels
+        // We need a wrapper panel in the NORTH where all four of our real top panels will live
+        JPanel topPanel = new JPanel();
+        helpPanel = new HelpActionPanel(this, allusers, allcourses, allsections, allterms);
+        coursesPanel = new CoursesActionPanel(this, allusers, allcourses, allsections, allterms);
+        sectionsPanel = new SectionsActionPanel(this, allusers, allcourses, allsections, allterms);
+        termsPanel = new TermsActionPanel(this, allusers, allcourses, allsections, allterms);
+        // add all four panels to the topPanel, but only one will ever be visible at a time
+        topPanel.add(helpPanel);
+        topPanel.add(coursesPanel);
+        topPanel.add(sectionsPanel);
+        topPanel.add(termsPanel);
+        // make sure ONLY the help panel is visible initially ... hide the other three panels
+        helpPanel.setVisible(true);
+        coursesPanel.setVisible(false);
+        sectionsPanel.setVisible(false);
+        termsPanel.setVisible(false);
+
+        catalogPanel = new CatalogPanel(this, allusers, allcourses, allsections, allterms);
+
+        frame.add(topPanel, BorderLayout.NORTH);
+        frame.add(catalogPanel, BorderLayout.CENTER);
+        frame.setVisible(true);
     }
 
     // reads from our current user data dump
@@ -137,6 +223,7 @@ public class Main {
         Random random = new Random();
         String[] schedules = { "MWF 9AM", "TR 11AM", "MW 2PM", "TR 3PM", "MWF 1PM", "TR 4PM" };
         String[] rooms = { "RUSS325", "SMITH200", "ENGR105", "MATH220", "SCIENCE301", "CHEM102" };
+        String[] numbers = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"};
 
         for (int i = 0; i < 50; i++) {
             Term term = terms.get(random.nextInt(terms.size()));
@@ -146,6 +233,7 @@ public class Main {
                                                                                                                  // students
             Section section = new Section(
                     term,
+                    numbers[random.nextInt(numbers.length)],
                     schedules[random.nextInt(schedules.length)],
                     rooms[random.nextInt(rooms.length)],
                     course,
@@ -159,10 +247,6 @@ public class Main {
             System.out.println(s);
             System.out.println("-----------------------------------------");
         }
-    }
-
-    protected void createAndShowGUI() {
-
     }
 
 }
