@@ -1,5 +1,8 @@
 package chap8.degreeworks;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -21,7 +24,18 @@ public class CoursesActionPanel extends ActionPanel {
     @Override
     protected JPanel setupGUI() {
         JPanel panel = new JPanel();
-        panel.add(new JLabel("Courses"));
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); 
+        northPanel.add(new JLabel("COURSES ACTION PANEL"), BorderLayout.NORTH);
+        panel.add(northPanel, BorderLayout.NORTH);
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new GridBagLayout());
+
+        // fill in the rest of your code here to add all the necessary components to the centerPanel
+
+        panel.add(centerPanel, BorderLayout.CENTER);
+
         return panel;
     }
 

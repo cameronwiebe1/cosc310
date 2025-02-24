@@ -22,11 +22,16 @@ public class CatalogPanel extends JPanel {
     protected JList<String> coursesList;
     protected JList<String> sectionsList;
     protected JList<String> termsList;
+
+    // data references
     protected ArrayList<User> allusers;
     protected ArrayList<Course> allcourses;
     protected ArrayList<Section> allsections;
     protected ArrayList<Term> allterms;
-                        
+    private Term selectedTerm; // the currently selected Term
+    private Course selectedCourse; // the currently selected Course
+    private Section selectedSection; // the currently selected Section
+       
     public CatalogPanel(Main main, ArrayList<User> allusers, ArrayList<Course> allcourses, ArrayList<Section> allsections, ArrayList<Term> allterms) {
         this.main = main;
         this.allusers = allusers;
@@ -54,17 +59,20 @@ public class CatalogPanel extends JPanel {
         // setup all the click listeners just to pass the relevant data back to Main
         termsList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && termsList.getSelectedIndex() != -1) {
-                main.handleTermClick(allterms.get(termsList.getSelectedIndex()));
+                selectedTerm = allterms.get(termsList.getSelectedIndex());
+                main.handleTermClick(selectedTerm);
             }
         });
         coursesList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && coursesList.getSelectedIndex() != -1) {
-                main.handleCourseClick(allcourses.get(coursesList.getSelectedIndex()));
+                selectedCourse = allcourses.get(coursesList.getSelectedIndex());
+                main.handleCourseClick(selectedCourse);
             }
         });
         sectionsList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && sectionsList.getSelectedIndex() != -1) {
-                main.handleSectionClick(allsections.get(sectionsList.getSelectedIndex()));
+                selectedSection = allsections.get(sectionsList.getSelectedIndex());
+                main.handleSectionClick(selectedSection);
             }
         });
 
@@ -88,6 +96,10 @@ public class CatalogPanel extends JPanel {
     }
         
     public void loadCourse(Course c) {
+    }
+
+    public Term getSelectedTerm() {
+        return selectedTerm;
     }
     
 }
