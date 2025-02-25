@@ -48,7 +48,6 @@ public class Main {
 
     public void handleCourseClick(Course c) {
         coursesPanel.loadCourse(c);
-        catalogPanel.loadCourse(c);
         
         // update visibility of all four panels
         helpPanel.setVisible(false);
@@ -95,7 +94,8 @@ public class Main {
                 createAndShowGUI();
             }
         });
-        System.out.println("exiting");
+
+        System.out.println("exiting main thread, swing GUI thread is now handling the program");
     }
 
     private User showLogin() {

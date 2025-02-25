@@ -93,13 +93,47 @@ public class CatalogPanel extends JPanel {
         for (Section s : allsections) {
             sectionlistModel.addElement(s.toString());
         }
-    }
-        
-    public void loadCourse(Course c) {
+        if (allterms.contains(selectedTerm)) {
+            setSelectedTerm(selectedTerm);
+        } else {
+            selectedTerm = null;
+        }
+        if (allcourses.contains(selectedCourse)) {
+            setSelectedCourse(selectedCourse);
+        } else {
+            selectedCourse = null;
+        }
+        if (allsections.contains(selectedSection)) {
+            setSelectedSection(selectedSection);
+        } else {
+            selectedSection = null;
+        }
     }
 
+    // getters and setters
     public Term getSelectedTerm() {
         return selectedTerm;
+    }
+    public void setSelectedTerm(Term t) {
+        selectedTerm = t;
+        termsList.setSelectedIndex(allterms.indexOf(selectedTerm));
+        termsList.ensureIndexIsVisible(termsList.getSelectedIndex());
+    }
+    public Course getSelectedCourse() {
+        return selectedCourse;
+    }
+    public void setSelectedCourse(Course c) {
+        selectedCourse = c;
+        coursesList.setSelectedIndex(allcourses.indexOf(selectedCourse));
+        coursesList.ensureIndexIsVisible(coursesList.getSelectedIndex());
+    }
+    public Section getSelectedSection() {
+        return selectedSection;
+    }
+    public void setSelectedSection(Section s) {
+        selectedSection = s;
+        sectionsList.setSelectedIndex(allsections.indexOf(selectedSection));
+        sectionsList.ensureIndexIsVisible(sectionsList.getSelectedIndex());
     }
     
 }

@@ -2,12 +2,11 @@ package chap8.degreeworks;
 
 import java.util.ArrayList;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -76,7 +75,7 @@ public class TermsActionPanel extends ActionPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         addButton = new JButton("Add New Term");
-        submitButton = new JButton("Submit");
+        submitButton = new JButton("Add");
         cancelButton = new JButton("Cancel");
         updateButton = new JButton("Update Selected Term");        
         deleteButton = new JButton("Delete Selected Term");
@@ -107,14 +106,25 @@ public class TermsActionPanel extends ActionPanel {
                 String year = yearField.getText();
                 Term t = new Term(name, year);
                 allterms.add(t);
+                main.catalogPanel.setSelectedTerm(t);
                 main.catalogPanel.updateAllLists();
-                nameField.setText("");
-                yearField.setText("");                
             }
         });
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadTerm(main.catalogPanel.getSelectedTerm());
+                Term t = main.catalogPanel.getSelectedTerm();
+                if (t != null) {
+                    loadTerm(main.catalogPanel.getSelectedTerm());
+                } else if (allterms.size() > 0) {
+                    main.catalogPanel.setSelectedTerm(allterms.get(0));
+                    loadTerm(allterms.get(0));
+                } else {
+                    addButton.setVisible(true);
+                    submitButton.setVisible(false);
+                    cancelButton.setVisible(false);
+                    updateButton.setVisible(false);
+                    deleteButton.setVisible(false);
+                }
             }
         });
         updateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -129,24 +139,22 @@ public class TermsActionPanel extends ActionPanel {
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Term t = main.catalogPanel.getSelectedTerm();
-                allterms.remove(t);
-                main.catalogPanel.updateAllLists();
-                nameField.setText("");
-                yearField.setText("");
-                addButton.setVisible(true);
-                submitButton.setVisible(false);
-                cancelButton.setVisible(false);
-                updateButton.setVisible(false);
-                deleteButton.setVisible(false);
+                if (JOptionPane.showConfirmDialog(buttonPanel, "Are you sure you want to delete this term?" + t, "Confirmation", JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+                    allterms.remove(t);
+                    main.catalogPanel.updateAllLists();
+                    nameField.setText("");
+                    yearField.setText("");
+                    addButton.setVisible(false);
+                    submitButton.setVisible(true);
+                    cancelButton.setVisible(true);
+                    updateButton.setVisible(false);
+                    deleteButton.setVisible(false);
+                }
             }
         });
 
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        centerPanel.add(buttonPanel, gbc);
-
         panel.add(centerPanel, BorderLayout.CENTER);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
         return panel;
     }
 
