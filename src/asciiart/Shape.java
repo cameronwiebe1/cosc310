@@ -16,9 +16,10 @@ public abstract class Shape {
 
     abstract public double getArea();
     abstract public double getPerimeter();
+    abstract public String getType();
 
     public void draw() {
-        System.out.println("Imagine the shape you are about to see is " + color);
+        System.out.println("Imagine the " + getType() + " you are about to see is " + color);
     }
 
 }

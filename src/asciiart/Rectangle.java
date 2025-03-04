@@ -19,8 +19,20 @@ public class Rectangle extends Shape {
     @Override
     public void draw() {
         super.draw();
-        
+        String topbottom = (""+c).repeat(w);
+        String middle = c + " ".repeat(w-2) + c;
+        System.out.println(topbottom);
+        for(int i=0; i<l-2; i++) {
+            System.out.println(middle);
+        }
+        System.out.println(topbottom);
     }
+
+    @Override
+    public String getType() {
+        return "RECTANGLE";
+    }
+
 
 
     
