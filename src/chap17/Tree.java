@@ -54,8 +54,10 @@ public class Tree<E> {
     // the size of the subtree rooted at n
     public long size(TreeNode<E> n) {
         long nsize = 1;
-        for (TreeNode<E> child : n.children) {
-            nsize += size(child);
+        if (n.children != null) {
+            for (TreeNode<E> child : n.children) {
+                nsize += size(child);
+            }
         }
         return nsize;
     }
@@ -68,7 +70,10 @@ public class Tree<E> {
     public String toString(TreeNode<E> n, int indent) {
         String spacestring = " ".repeat(indent);
         String result = spacestring + n.data.toString();
-        // FINISH THIS!
+
+        // FINISH THIS 
+        // TURN OFF CO-PILOT FIRST
+        // DON'T USE CHATGPT        
 
         return result;
     }
