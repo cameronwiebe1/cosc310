@@ -86,6 +86,7 @@ public class Tree<E> {
         return root==null ? null : search(e, root);
     }
 
+    // DFS helper, but also useful for API ... starting your search at a particular node
     public TreeNode<E> search(E e, TreeNode<E> n) {
         if (n.data.equals(e)) {
             return n;
@@ -101,22 +102,28 @@ public class Tree<E> {
         return null;
     }
 
-    public TreeNode<E> searchBFS(E e, ArrayList<TreeNode<E>> bfsqueue) {        
-       // if (bfsqueue.)) {
-       //     return n;
-       // }
+    // alternative search method that uses BFS instead of DFS
+    public TreeNode<E> searchBFS(E e) {
+        ArrayList<TreeNode<E>> bfsqueue = new ArrayList<>();
+        bfsqueue.add(root);
+        return searchBFS(e, bfsqueue);
+    }
+
+    // BFS helper, but NOT useful for API b/c how do you know what "queue" to pass in?
+    protected TreeNode<E> searchBFS(E e, ArrayList<TreeNode<E>> bfsqueue) {        
+        if (bfsqueue.isEmpty()) {
+            return null;
+        }
+        TreeNode<E> n = bfsqueue.remove(0);
+        if (n.data.equals(e)) {
+            return n;
+        }
         if (n.children != null) {
             for (TreeNode<E> child : n.children) {
-                if (child.equals(e))
-                    return child;
-            }
-            for (TreeNode<E> child : n.children) {
-                TreeNode<E> hit = searchBFS(e, child);
-                if (hit != null)
-                  return hit;
+                bfsqueue.add(child);
             }
         }
-        return null;
+        return searchBFS(e, bfsqueue);
     }
 
     @Override
