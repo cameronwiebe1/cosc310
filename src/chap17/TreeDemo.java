@@ -9,5 +9,9 @@ public class TreeDemo {
         airports.addChild(msp,"ORD");
         System.out.println(airports);
         System.out.println(airports.toString(msp, 0));
+        System.out.println(airports.search("BHM"));
+        System.out.println(airports.search("ABC"));
+        System.out.println(airports.search("ORD"));
+
     }
 }
