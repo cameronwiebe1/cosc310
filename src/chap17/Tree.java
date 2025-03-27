@@ -135,9 +135,7 @@ public class Tree<E> {
         String spacestring = " ".repeat(indent);
         String result = spacestring + n.data.toString();
 
-        // FINISH THIS 
-        // TURN OFF CO-PILOT FIRST
-        // DON'T USE CHATGPT        
+        // DO THIS! ADD STUFF!
 
         return result;
     }
