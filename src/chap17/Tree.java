@@ -1,7 +1,6 @@
 package chap17;
 
 import java.util.ArrayList;
-
 public class Tree<E> {
     
     protected TreeNode<E> root;
@@ -135,7 +134,7 @@ public class Tree<E> {
         String spacestring = " ".repeat(indent);
         String result = spacestring + n.data.toString();
 
-        // DO THIS! ADD STUFF!
+        // ADD YOUR RECURSIVE CALL HERE ... HINT: LOOP THROUGH THE CHILDREN AND RECURSE ON EACH ONE! ANOTHER HINT: CHECK TO MAKE SURE CHILDREN IS NOT NULL FIRST
 
         return result;
     }
