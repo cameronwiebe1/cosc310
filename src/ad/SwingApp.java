@@ -22,9 +22,9 @@ public class SwingApp {
         // Create login panel with GridLayout
         JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
         JLabel lblUsername = new JLabel("Username:");
-        JTextField txtUsername = new JTextField();
+        JTextField txtUsername = new JTextField("wendys");
         JLabel lblPassword = new JLabel("Password:");
-        JPasswordField txtPassword = new JPasswordField();
+        JPasswordField txtPassword = new JPasswordField("test1111");
         JButton btnLogin = new JButton("Login");
 
         panel.add(lblUsername);
@@ -91,6 +91,8 @@ public class SwingApp {
             dashboardPanel = new AdminDashboardPanel();
         } else if ("SALES".equalsIgnoreCase(role)) {
             dashboardPanel = new UserDashboardPanel();
+        } else if ("BUSINESSCUSTOMER".equalsIgnoreCase(role)) {
+            dashboardPanel = new BusinessCustomerDashboardPanel();
         } else {
             dashboardPanel = new DefaultDashboardPanel();
         }
@@ -113,6 +115,41 @@ public class SwingApp {
             setLayout(new BorderLayout());
             add(new JLabel("Welcome, User!"), BorderLayout.NORTH);
             // Additional user-specific components can be added here
+        }
+    }
+
+    static class BusinessCustomerDashboardPanel extends JPanel {
+        public BusinessCustomerDashboardPanel() {
+            setLayout(new BorderLayout());
+            add(new JLabel("Welcome, Business Customer!"), BorderLayout.NORTH);
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new FlowLayout()); // You can change the layout as needed
+
+            // Add buttons to the panel
+            JButton btnAds = new JButton("Ads");
+            JButton btnBilling = new JButton("Billing");
+            JButton btnLogout = new JButton("Logout");
+
+            buttonPanel.add(btnAds);
+            buttonPanel.add(btnBilling);
+            buttonPanel.add(btnLogout);
+
+            JPanel adsPanel = new JPanel(new BorderLayout());
+            adsPanel.add(new JLabel("Ads Section"), BorderLayout.NORTH);
+            JTextArea currentads = new JTextArea(10, 30);
+            JTextArea oldads = new JTextArea(10, 30);
+            adsPanel.add(new JScrollPane(currentads), BorderLayout.CENTER);
+            adsPanel.add(new JScrollPane(oldads), BorderLayout.SOUTH);
+            buttonPanel.add(adsPanel);
+            adsPanel.setVisible(false); // Initially hide the ads panel
+
+            btnAds.addActionListener(e -> {
+                // Action for Ads button
+                adsPanel.setVisible(true); // Show the ads panel
+            });
+
+            // Add the button panel to the center of the UserDashboardPanel
+            add(buttonPanel, BorderLayout.CENTER);
         }
     }
 
