@@ -10,10 +10,10 @@ public class ThreadDemo {
 
         // Search for a number in the array
         long start = System.nanoTime();
-        int needle = 100_001; // number to search for ... won't be found ... maxium amount of time
-        int index = Searcher.findFirst(needle, nums);
-        if (index != -1) {
-            System.out.println("Found " + needle + " at index " + index);
+        int needle = -348; // number to search for 
+        int index[] = Searcher.findAll(needle, nums);
+        if (index.length>0) {
+            System.out.println("Found " + needle + " at index " + java.util.Arrays.toString(index));
         } else {
             System.out.println(needle + " not found");
         }
