@@ -2,6 +2,8 @@ package chap17;
 
 import java.util.ArrayList;
 
+import chap17.BST.BSTNode;
+
 public class BSTDemo {
     public static void main(String[] args) {
         BST<String> airports = new BST<>("BHM");
@@ -17,7 +19,7 @@ public class BSTDemo {
         for (String airport : airportsparsed) {
             lotsofairports.add(airport);
         }
-        System.out.println(lotsofairports);
+        System.out.println(lotsofairports);                
         System.out.println();
         String airportssorted[] = java.util.Arrays.copyOf(airportsparsed, airportsparsed.length);
         java.util.Arrays.sort(airportssorted);
@@ -35,6 +37,38 @@ public class BSTDemo {
         }
         System.out.println(leftleaning);
 
+        System.out.println("Searching for ZZZ in rightleaning");
+        long start = System.nanoTime();
+        BSTNode hit = rightleaning.search("ZZZ");
+        long end = System.nanoTime();
+        System.out.println("Time taken to search for ZZZ: " + (end - start) + " ns");
+        if (hit == null) {
+            System.out.println("ZZZ not found");
+        } else {
+            System.out.println("ZZZ found: " + hit);
+        }
+
+        System.out.println("Searching for AAA in leftleaning");
+        start = System.nanoTime();
+        hit = leftleaning.search("AAA");
+        end = System.nanoTime();
+        System.out.println("Time taken to search for AAA: " + (end - start) + " ns");
+        if (hit == null) {
+            System.out.println("AAA not found");
+        } else {
+            System.out.println("AAA found: " + hit);            
+        }
+
+        System.out.println("Searching for MMM in lotsofairports");
+        start = System.nanoTime();
+        hit = lotsofairports.search("MMM");
+        end = System.nanoTime();
+        System.out.println("Time taken to search for MMM: " + (end - start) + " ns");
+        if (hit == null) {
+            System.out.println("MMM not found");
+        } else {
+            System.out.println("MMM found: " + hit);            
+        }
     }
 
 }
