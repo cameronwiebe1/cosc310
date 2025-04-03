@@ -34,10 +34,11 @@ public class Searcher {
                  hits.add(i);
             }
         }
-        Integer retval[] = (Integer[]) hits.toArray();
-        return java.util.Arrays.stream(retval)
-        .mapToInt(Integer::intValue)
-        .toArray();
+        int retval[] = new int[hits.size()];
+        for (int i=0; i<hits.size(); i++) {
+            retval[i] = hits.get(i);
+        }
+        return retval;
     }
 
     /**
@@ -66,5 +67,5 @@ public class Searcher {
             return bfindFirst(themiddle+1, j, needle, haystack);
         }
     }
-    
+
 }
