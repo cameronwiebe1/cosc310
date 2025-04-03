@@ -67,4 +67,43 @@ public class Searcher {
         }
     }
 
+    public static int mthreadFindFirst(int needle, int haystack[]) {
+        int themiddle = haystack.length / 2;
+        int t1result = -1;
+        int t2result = -1;
+        Thread t1 = new Thread(new Runnable() {
+            public void run() {
+                mthreadSearchHelper(0, themiddle, needle, haystack);
+            }
+        });
+        Thread t2 = new Thread(new Runnable() {
+            public void run() {
+                mthreadSearchHelper(themiddle, haystack.length, needle, haystack);
+            }
+        });
+        t1.start();
+        t2.start();
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException ex) {
+            // do nothing
+        }
+        if (t1result != -1) {
+            return t1result;
+        } else if (t2result != -1) {
+            return t2result;
+        }
+        return -1;
+    }
+
+    public static int mthreadSearchHelper(int i, int j, int needle, int haystack[]) {
+        for (int k=i; k<j; k++) {
+            if (needle==haystack[k]) {
+                return k;
+            }
+        }
+        return -1;
+    }
+
 }
