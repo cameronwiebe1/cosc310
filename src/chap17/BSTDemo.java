@@ -59,15 +59,15 @@ public class BSTDemo {
             System.out.println("AAA found: " + hit);            
         }
 
-        System.out.println("Searching for MMM in lotsofairports");
+        System.out.println("Searching for ZZZ in lotsofairports");
         start = System.nanoTime();
-        hit = lotsofairports.search("MMM");
+        hit = lotsofairports.search("ZZZ");
         end = System.nanoTime();
-        System.out.println("Time taken to search for MMM: " + (end - start) + " ns");
+        System.out.println("Time taken to search for ZZZ: " + (end - start) + " ns");
         if (hit == null) {
-            System.out.println("MMM not found");
+            System.out.println("ZZZ not found");
         } else {
-            System.out.println("MMM found: " + hit);            
+            System.out.println("ZZZ found: " + hit);            
         }
     }
 
