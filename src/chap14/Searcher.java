@@ -54,22 +54,16 @@ public class Searcher {
     // i - inclusive, the start of where we are searching
     // j - exclusive, the end of where we are searching
     public static int bfindFirst(int i, int j, int needle, int haystack[]) {
-        if (i==j-1) {
-            if (haystack[i]==needle) {
-                // we got it on the last chance!
-                return i;
-            } else {
-                // too bad, not found
-                return -1;
-            }
+        if (i>=j) {
+            return -1;
         }
-        int themiddle = (j-i) / 2;
+        int themiddle = i + (j-i) / 2;
         if (haystack[themiddle] == needle) {
             return themiddle;
         } else if (needle < haystack[themiddle]) {
             return bfindFirst(i, themiddle, needle, haystack);
         } else {
-            return bfindFirst(themiddle, j, needle, haystack);
+            return bfindFirst(themiddle+1, j, needle, haystack);
         }
     }
 
